@@ -1,0 +1,19 @@
+[
+  {
+    "modid": "openthings",
+    "name": "OpenThings",
+    "description": "Things for OpenComputers. Not much else to say.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "authorList": [
+      "Zane1117"
+    ],
+    "credits": "FG6 Build template for 1.12.2 made by The_Computerizer. Thanks Computerizer!",
+    "logoFile": "modlogo.png",
+    "screenshots": [],
+    "dependencies": [
+      "opencomputers"
+    ]
+  }
+]
