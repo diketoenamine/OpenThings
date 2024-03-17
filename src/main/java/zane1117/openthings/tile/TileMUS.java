@@ -43,13 +43,13 @@ public class TileMUS extends TileEntityEnvironment implements ITickable {
         }
     }
 
-    @Callback(doc = "function(playerName:string):boolean -- Begins tracking the player with the specified name. Returns true if the player is being tracked, and false if the call failed.")
+    @Callback(doc = "function(playerName:string):boolean -- Begins tracking the player with the specified name. Returns true if the call succeeded, false and an error message if not.")
     public Object[] startTracking(Context context, Arguments args) {
         if (this.isTracking) {return new Object[]{false};}
         World world = this.getWorld();
         MinecraftServer server = world.getMinecraftServer();
         if (server == null) {
-            OpenThings.LOGGER.error("Server is null!"); return new Object[]{false};}
+            OpenThings.LOGGER.error("Server is null!"); return new Object[]{false, "server doesn't exist"};}
         PlayerList players = server.getPlayerList();
         EntityPlayerMP player = players.getPlayerByUsername(args.checkString(0));
         if (player != null) {
@@ -59,7 +59,7 @@ public class TileMUS extends TileEntityEnvironment implements ITickable {
             return new Object[]{true};
         } else {
             OpenThings.LOGGER.error("Player is null!");
-            return new Object[]{false};
+            return new Object[]{false, "player doesn't exist"};
         }
     }
 
@@ -82,7 +82,7 @@ public class TileMUS extends TileEntityEnvironment implements ITickable {
         }
     }
 
-    @Callback(doc = "function():tuple -- Gets and returns the dimension ID that the currently tracked player is in.")
+    @Callback(doc = "function():number -- Gets and returns the dimension ID that the currently tracked player is in.")
     public Object[] getDimension(Context context, Arguments args) {
         if (this.isTracking) {
             context.pause(1.2);
