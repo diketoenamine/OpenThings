@@ -40,7 +40,7 @@ public class OpenThings {
     public static CreativeTabs OpenThingsTab = new CreativeTabs("openthings") {
         @Override
         public ItemStack createIcon() {
-            return ItemStack.EMPTY;
+            return ObjectHolder.emerald_chip.getDefaultInstance();
         }
     };
 

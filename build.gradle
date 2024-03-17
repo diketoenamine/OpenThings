@@ -140,6 +140,7 @@ dependencies {
     implementation("io.github.kostaskougios:cloning:${project.cloning_version}")
     implementation(fg.deobf("curse.maven:opencomputers-223008:${project.oc_version}"))
     implementation(fg.deobf("curse.maven:mixinbootstrap-357178:${project.bootstrap_version}"))
+    implementation(fg.deobf("curse.maven:bonsai-trees-278993:2846217"))
 
     //Compile Only `compileOnly`
     compileOnly(fg.deobf("curse.maven:applied-energistics-2-223794:${project.ae2_version}"))
