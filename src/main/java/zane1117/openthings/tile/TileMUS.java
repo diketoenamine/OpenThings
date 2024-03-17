@@ -45,7 +45,7 @@ public class TileMUS extends TileEntityEnvironment implements ITickable {
 
     @Callback(doc = "function(playerName:string):boolean -- Begins tracking the player with the specified name. Returns true if the call succeeded, false and an error message if not.")
     public Object[] startTracking(Context context, Arguments args) {
-        if (this.isTracking) {return new Object[]{false};}
+        if (this.isTracking) {return new Object[]{false, "already tracking"};}
         World world = this.getWorld();
         MinecraftServer server = world.getMinecraftServer();
         if (server == null) {
