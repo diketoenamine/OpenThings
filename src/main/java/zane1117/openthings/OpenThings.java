@@ -1,9 +1,10 @@
 package zane1117.openthings;
 
 import li.cil.oc.api.Machine;
-import li.cil.oc.common.block.Case;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -19,10 +20,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import zane1117.openthings.architecture.WD6502Architecture;
 import zane1117.openthings.block.BlockCaseT4;
+import zane1117.openthings.block.BlockMUS;
+import zane1117.openthings.item.ItemBlockMUS;
 import zane1117.openthings.item.TooltippedItem;
-import zane1117.openthings.tile.TECaseT4;
-
-import javax.tools.Tool;
+import zane1117.openthings.tile.TileCaseT4;
+import zane1117.openthings.tile.TileMUS;
 
 @Mod(modid = OpenThings.MODID, name = OpenThings.NAME, version = OpenThings.VERSION, dependencies = OpenThings.DEPENDENCIES)
 @Mod.EventBusSubscriber
@@ -33,7 +35,7 @@ public class OpenThings {
     public static final String DEPENDENCIES = "required-after:opencomputers@1.8.3";
 
     @Mod.Instance
-    public static final OpenThings INSTANCE = null;
+    public static OpenThings INSTANCE = null;
     public static Logger LOGGER = LogManager.getLogger(MODID);
     public static CreativeTabs OpenThingsTab = new CreativeTabs("openthings") {
         @Override
@@ -48,17 +50,21 @@ public class OpenThings {
     public static void registerItems(RegistryEvent.Register<Item> event) {
         LOGGER.info("Registering items");
         ForgeRegistries.ITEMS.register(new TooltippedItem("emerald_chip", "A small piece of a once lustrous emerald. Your villagers will never want to see it again."));
+        ForgeRegistries.ITEMS.register(new ItemBlockMUS());
     }
 
     @SubscribeEvent
-    public static void registerBlocks(RegistryEvent.Register<Item> event) {
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {
         LOGGER.info("Registering blocks");
         ForgeRegistries.BLOCKS.register(new BlockCaseT4());
+        ForgeRegistries.BLOCKS.register(new BlockMUS());
+
     }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        GameRegistry.registerTileEntity(TECaseT4.class, new ResourceLocation("openthings", "case_t4"));
+        GameRegistry.registerTileEntity(TileCaseT4.class, new ResourceLocation("openthings", "case_t4"));
+        GameRegistry.registerTileEntity(TileMUS.class, new ResourceLocation("openthings", "sonar"));
         Machine.add(WD6502Architecture.class);
     }
 
@@ -75,5 +81,14 @@ public class OpenThings {
     @GameRegistry.ObjectHolder(MODID)
     public static class ObjectHolder {
         public static final Item emerald_chip = null;
+        public static final Block sonar = null;
+    }
+
+    public static ItemBlock buildIB(Block block) {
+        ItemBlock ib = new ItemBlock(block);
+        ib.setRegistryName(block.getRegistryName());
+        ib.setTranslationKey(block.getTranslationKey());
+        ib.setCreativeTab(OpenThingsTab);
+        return ib;
     }
 }

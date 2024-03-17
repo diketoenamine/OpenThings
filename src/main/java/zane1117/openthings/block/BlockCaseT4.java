@@ -1,11 +1,9 @@
 package zane1117.openthings.block;
 
-import li.cil.oc.common.block.Case;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -13,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import zane1117.openthings.OpenThings;
 import zane1117.openthings.gui.GUI;
-import zane1117.openthings.tile.TECaseT4;
+import zane1117.openthings.tile.TileCaseT4;
 
 import javax.annotation.Nullable;
 
@@ -29,7 +27,7 @@ public class BlockCaseT4 extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TECaseT4();
+        return new TileCaseT4();
     }
 
     @Override
