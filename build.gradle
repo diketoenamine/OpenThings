@@ -10,7 +10,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '6.0.+'
     id 'wtf.gofancy.fancygradle' version '1.1.+'
     id 'org.spongepowered.mixin' version '0.7.+'
-    //id 'com.github.johnrengelman.shadow' version '8.1.+'
+    id 'com.github.johnrengelman.shadow' version '8.1.+'
 }
 
 
@@ -108,11 +108,11 @@ repositories {
  * include a 3rd party library that isn't a mod. Don't use it to shade other mods unless they explicitly allow it since
  * you could run into licensing issues and unnecessarily duplicated code in modpacks.
  */
-//configurations {
-//    shade
-//    implementation.extendsFrom shade
-//    shadow.extendsFrom shade
-//}
+configurations {
+    shade
+    implementation.extendsFrom shade
+    shadow.extendsFrom shade
+}
 
 
 /**
@@ -134,7 +134,8 @@ dependencies {
     }
 
     //Shaded `shade`
-    //shade("io.github.kostaskougios:cloning:${project.cloning_version}")
+    //shade("org.assertj:assertj-core:3.25.1")
+    //shade("org.assertj:assertj-swing:3.9.2")
 
     //Implemented `implementation`
     implementation("io.github.kostaskougios:cloning:${project.cloning_version}")
@@ -165,23 +166,23 @@ dependencies {
  * mod is shading the same dependency. SLJ4 relocation is provided as an example, but it's usually good practice to
  * excluded Minecraft or Forge libraries from transitive dependencies so you dont
  */
-//shadowJar {
-//    relocate 'org.slf4j', "${shadow_group}.slf4j"
-//    configurations = [project.configurations.shadow]
-//    setArchiveClassifier('')
-//    mergeServiceFiles()
-//}
+shadowJar {
+    relocate 'org.slf4j', "${shadow_group}.slf4j"
+    configurations = [project.configurations.shadow]
+    setArchiveClassifier('')
+    mergeServiceFiles()
+}
 
 
 /**
  * The reobf task is only needed when the Shadow plugin is in use.
  */
-//reobf {
-//    shadowJar {
-//        dependsOn createMcpToSrg
-//        mappings = createMcpToSrg.output
-//    }
-//}
+reobf {
+    shadowJar {
+        dependsOn createMcpToSrg
+        mappings = createMcpToSrg.output
+    }
+}
 
 
 /**
@@ -237,6 +238,6 @@ jar {
  * These let the shadowJar task run at the correct time when the project is being built. They can be removed if the
  * Shadow plugin is not being used
  */
-//tasks.assemble.dependsOn('shadowJar')
-//tasks.shadowJar.dependsOn('reobfJar')
-//tasks.jar.finalizedBy('reobfJar')
+tasks.assemble.dependsOn('shadowJar')
+tasks.shadowJar.dependsOn('reobfJar')
+tasks.jar.finalizedBy('reobfJar')

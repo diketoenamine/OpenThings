@@ -14,8 +14,8 @@ import java.util.List;
 // Do I really need this?
 public class ItemBlockMUS extends ItemBlock {
     public ItemBlockMUS() {
-        super(OpenThings.ObjectHolder.sonar);
-        this.setRegistryName(OpenThings.ObjectHolder.sonar.getRegistryName());
+        super(OpenThings.ObjectHolder.blockSonar);
+        this.setRegistryName(OpenThings.ObjectHolder.blockSonar.getRegistryName());
     }
 
     @Override

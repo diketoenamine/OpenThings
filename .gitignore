@@ -86,3 +86,5 @@ roadmap.txt
 /build/
 /build/_compileJava_2/
 /build/_RenameSrg2Mcp_1273536122/
+
+*.xcf

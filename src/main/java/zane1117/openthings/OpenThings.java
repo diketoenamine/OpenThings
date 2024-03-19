@@ -2,11 +2,14 @@ package zane1117.openthings;
 
 import li.cil.oc.api.Machine;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -16,6 +19,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import zane1117.openthings.architecture.WD6502Architecture;
@@ -81,7 +86,10 @@ public class OpenThings {
     @GameRegistry.ObjectHolder(MODID)
     public static class ObjectHolder {
         public static final Item emerald_chip = null;
-        public static final Block sonar = null;
+        public static final Item sonar = null;
+
+        @GameRegistry.ObjectHolder("openthings:sonar")
+        public static final Block blockSonar = null;
     }
 
     public static ItemBlock buildIB(Block block) {
@@ -90,5 +98,16 @@ public class OpenThings {
         ib.setTranslationKey(block.getTranslationKey());
         ib.setCreativeTab(OpenThingsTab);
         return ib;
+    }
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    public void modelRegistryHandler(ModelRegistryEvent e) {
+        registerModel(ObjectHolder.emerald_chip);
+        registerModel(ObjectHolder.sonar);
+    }
+
+    protected static void registerModel(Item item) {
+        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
     }
 }

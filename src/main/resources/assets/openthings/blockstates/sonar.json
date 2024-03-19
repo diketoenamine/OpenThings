@@ -1,0 +1,10 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "openthings:sonar"
+  },
+  "variants": {
+    "tracking=false": [{"model":  "openthings:sonar"}],
+    "tracking=true": [{"model":  "openthings:sonar_on"}]
+  }
+}
