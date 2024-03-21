@@ -11,12 +11,13 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import zane1117.openthings.impl.T4CaseItemHandler;
 
 import javax.annotation.Nullable;
 
 public class TileCaseT4 extends TileEntityEnvironment implements MachineHost, ICapabilityProvider {
     private Machine machine;
-    private ItemStackHandler inventory = new ItemStackHandler(9);
+    private T4CaseItemHandler inventory = new T4CaseItemHandler();
 
     public TileCaseT4() {
         super();
